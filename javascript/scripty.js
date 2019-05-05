@@ -3,6 +3,8 @@ var numberOfBalls=70;
 var numberOfMonsters=2;
 var blackBalls=0;
 var time;
+var interval;
+var gameInterval;
 var user = {
   username: "",
   password: "",
@@ -51,6 +53,8 @@ var colorNum3;
 var pacmanPlace;
 var numberOfMon;
 var bgSound = new Audio("music/Intro.mp3");
+var lostSound = new Audio("music/pacman_death.wav");
+var winSound = new Audio("music/Ta Da-SoundBible.com-1884170640.mp3");
 var totalSeconds = 0;
 var numOfCoinFirst;
 var monsterPlace=new Array();//all monster position
@@ -111,8 +115,10 @@ function checkDetails(elem){
         openPage("Settings",elem);
         return;
       }
-      else
+      else{
         alert("Wrong password. \nPlease try again");
+        return;
+      }
     }
   }
   alert("Wrong or not exist username.\nPlease register if you are a new user or try again if you are registered");
@@ -625,7 +631,7 @@ function moveFunnyImage(){
 }
 
 function moveRandomFunnyImage(){
-  setInterval(() => {
+  interval = setInterval(() => {
     moveFunnyImage();
   }, 1000);
 }
@@ -648,7 +654,7 @@ function pad(val) {
 }
 
 function startGame(){
-  setInterval(() => {
+  gameInterval = setInterval(() => {
     moveMoster();
   }, 1000);
 }
@@ -941,20 +947,27 @@ function drowAfterMove(direction){
 }
 
 function endGame(alertMes,type){
-  stopMusic;
+  stopMusic();
+  clearInterval(interval);
+  clearInterval(gameInterval);
   context.clearRect(0,0,canvas.width,canvas.height);
   context=canvas.getContext("2d");
   var imageBack=new Image();
-  if(type=="win"){
+  var imgHeight = 0;
+  var textWidth = 0;
+  if(type ==="win"){
     imageBack.src="images/images.jpg";
+    imgHeight = 70;
+    textWidth = 240;
   }
   else{
     imageBack.src="images/Loser.jpg";
+    imgHeight = 10;
+    textWidth = 210;
   }
   imageBack.onload=function(){
-    context.drawImage(imageBack,0,0);
-  }
-  context.font = "30px Verdana";
+    context.drawImage(imageBack,100,imgHeight,400,400);
+    context.font = "30px Verdana";
   // Create gradient
   var gradient = context.createLinearGradient(0, 0, canvas.width, 0);
   gradient.addColorStop("0"," magenta");
@@ -962,14 +975,36 @@ function endGame(alertMes,type){
   gradient.addColorStop("1.0", "red");
   // Fill with gradient
   context.fillStyle = gradient;
-  context.fillText(alertMes, canvas.width/2, canvas.height/2);
+  context.fillText(alertMes, textWidth, 450);
+  if(type === "win")
+    playWin();
+  else
+    playlose();
+  }
+  
 }
-
+/*
+  plays the winner music
+*/
+function playWin(){
+  winSound.play();
+}
+/*
+  plays the loser music
+*/
+function playlose(){
+  lostSound.play();
+}
+/*
+  plays the background music
+*/
 function addMusic(){
 bgSound.loop = true;
 bgSound.play();
 }
-
+/*
+  stops the music
+*/
 function stopMusic(){
   bgSound.pause();
 }
