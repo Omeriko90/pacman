@@ -292,7 +292,6 @@ $().ready(function () {
         }
       },
       submitHandler: function(form,event){
-        check();
         var newUser = Object.create(user);
         var temp = $("#username");
         newUser.username = $("#username").val();
