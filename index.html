@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style type="text/css">
+        body {
+        padding: 0;
+        margin: 0;
+        }
+        #canvas{
+            width: 100%
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+  <div id="titlebar">
+    <p class="top">
+      <img src="images/logo.png" width="40" height="40">        
+      <span class="omer">Omer Domb 302587316 </span>
+      <span class="raheli">Raheli Sagron 305125924</span>
+      </p>
+</div>
+    <div class="tabs">
+        <button class="tablink active" id="WelcomeHeader" onclick="openPage('Welcome', this)">Welcome</button>
+        <button class="tablink" id="RegisterHeader" onclick="openPage('Register', this)" >Register</button>
+        <button class="tablink" id="LoginHeader" onclick="openPage('Login', this)">Login</button>
+        <button class="tablink" id="AboutHeader" data-toggle="modal" data-target="#About">About</button>
+    </div>
+<div id="Welcome" class="tabcontent" style="display: block">
+  <div class="welcome">
+    <h3>Welcome to the Pacman Game</h3>
+    <div class="welcome">
+      <img src="images/logo.png">
+    </div>
+    <div class="welcome">
+      <button class="welcomeButtons" id="loginButton" onclick="openPage('Login', this)"><i class="glyphicon glyphicon-user"></i> Login</button>
+      <button class="welcomeButtons" id="registerButton" onclick="openPage('Register', this)"><i class="glyphicon glyphicon-pencil"></i> Register</button>
+    </div>
+  </div>
+</div>
+
+<div id="Register" class="tabcontent">
+  <form id="register">
+  <div class="content">
+ <!---heading---->
+     <header class="heading">Registration</header><hr></hr>
+  <!---Form starting----> 
+  <div id="details" class="row ">
+   <!--- For Name---->
+         <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">First Name :</label> </div>
+             <div class="col-xs-8">
+                 <input type="text" name="firstName" id="firstName" placeholder="Enter your First Name" class="form-control">
+             </div>
+          </div>
+     </div>
+     
+     
+         <div class="col-sm-12">
+         <div class="row">
+           <div class="col-xs-4">
+                     <label class="lastname">Last Name :</label></div>
+        <div class ="col-xs-8">  
+                 <input type="text" name="lastName" id="lastName" placeholder="Enter your Last Name" class="form-control">
+                </div>
+         </div>
+     </div>
+     <!-----For email---->
+     <div class="col-sm-12">
+         <div class="row">
+           <div class="col-xs-4">
+                 <label class="mail" >Email :</label></div>
+           <div class="col-xs-8"  >  
+                <input type="email" name="email"  id="email" placeholder="Enter your email" class="form-control" >
+             </div>
+         </div>
+     </div>
+   <!-----For Password ---->
+          <div class="col-sm-12">
+             <div class="row">
+             <div class="col-xs-4">
+                    <label class="pass">Password :</label></div>
+          <div class="col-xs-8">
+                   <input type="password" name="password" id="password" placeholder="Enter your Password" class="form-control">
+         </div>
+          </div>
+      </div>
+      <!-----For username---->
+      <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">Username :</label> </div>
+             <div class="col-xs-8">
+                 <input type="text" name="username" id="username" placeholder="Enter your Username" class="form-control">
+             </div>
+          </div>
+     </div>
+      <!-----For date of birth---->
+      <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">Date of Birth :</label> </div>
+             <div class="col-xs-8">
+                 <input type="date" name="dob" id="dob" placeholder="Enter your date of birth" class="form-control">
+             </div>
+          </div>
+     </div>   
+   </div>
+   <br>  
+      <input class="welcomeButtons" type="submit" value="Submit">
+      </div>
+      </form>
+</div>
+
+<div id="Login" class="tabcontent">
+    <div id="card" class="card card-container login" style="width: 300px">
+        <img id="profile-img" width="100" height="100" class="profile-img-card" src="images/logo.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="text" id="user" class="form-control" placeholder="Username" required autofocus>
+            <input type="password" id="pass" class="form-control" placeholder="Password" required>
+            <div id="remember" class="checkbox">
+            </div>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" onclick="checkDetails(this)" type="submit">Sign in</button>
+    </div><!-- /card-container -->
+</div>
+
+<div id="Settings" class="tabcontent">
+  <form id="settings">
+    <div class="content">
+ <!---heading---->
+     <header class="heading">Settings</header><hr></hr>
+  <!---Form starting----> 
+  <div id="details" class="row ">
+   <!--- For Game Contols---->
+   <!--- For Up key---->
+         <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">Up :</label> </div>
+             <div class="col-xs-8">
+                 <input type="text" name="up" id="up" placeholder="Enter up move key" class="form-control">
+             </div>
+          </div>
+     </div>
+     <!-----For Down key---->
+         <div class="col-sm-12">
+         <div class="row">
+           <div class="col-xs-4">
+                     <label class="lastname">Down :</label></div>
+        <div class ="col-xs-8">  
+                 <input type="text" name="down" id="down" placeholder="Enter down move key" class="form-control">
+                </div>
+         </div>
+     </div>
+     <!-----For Left key---->
+     <div class="col-sm-12">
+         <div class="row">
+           <div class="col-xs-4">
+                 <label class="mail" >Left :</label></div>
+           <div class="col-xs-8"  >  
+                <input type="text" name="left" id="left" placeholder="Enter left move key" class="form-control" >
+             </div>
+         </div>
+     </div>
+   <!-----For Right key ---->
+          <div class="col-sm-12">
+             <div class="row">
+             <div class="col-xs-4">
+                    <label class="pass">Right :</label></div>
+          <div class="col-xs-8">
+                   <input type="text" name="right" id="right" placeholder="Enter right move key" class="form-control">
+         </div>
+          </div>
+      </div>
+      <!-----For Balls Number---->
+      <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">Number of balls :</label> </div>
+             <div class="col-xs-8">
+              <div class="sliders">
+                 <input type="range" name="numOfBalls" id="numOfBalls" oninput="updateValue(event)" min="50" max="90" class="slider">
+                 <p class="values" id="ballSliderValue">70</p>
+                 </div>
+             </div>
+          </div>
+     </div>
+     <!-----For First Ball---->
+      <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">5 point Ball Color :</label> </div>
+             <div class="col-xs-8">
+                 <input type="color" name="firstBall" id="firstBall" onchange="setBallValue(this,0)" class="form-control" value="#e66465">
+             </div>
+          </div>
+     </div>
+      <!-----For Second Ball---->
+      <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">15 point Ball Color :</label> </div>
+             <div class="col-xs-8">
+                 <input type="color" name="secondBall" id="secondBall" onchange="setBallValue(this,1)" class="form-control" value="#e66465">
+             </div>
+          </div>
+     </div>
+     <!-----For Third Ball---->  
+           <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">25 point Ball Color :</label> </div>
+             <div class="col-xs-8">
+                 <input type="color" name="thirdBall" id="thirdBall" onchange="setBallValue(this,2)" class="form-control" value="#e66465">
+             </div>
+          </div>
+     </div> 
+     <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">Time :</label> </div>
+             <div class="col-xs-8">
+                 <input type="number" name="time" id="time" min="60" onblur="setTime(this)" placeholder="60 seconds minimun" class="form-control">
+             </div>
+          </div>
+     </div> 
+     <div class="col-sm-12">
+             <div class="row">
+           <div class="col-xs-4">
+                     <label class="firstname">Number of monsters :</label> </div>
+             <div class="col-xs-8">
+              <div class="sliders">
+                 <input type="range" name="numOfMonsters" id="numOfMonsters" oninput="updateValue(this)" min="1" max="3" class="slider">
+                 <p class="values" id="monsterSliderValue">2</p>
+                 </div>
+             </div>
+          </div>
+     </div>
+   </div>
+      <button class="welcomeButtons" onclick="setRandomVariabels()"><i class="glyphicon glyphicon-random"></i> Random</button>  
+      <button class="welcomeButtons" type="submit">Submit</button>
+      </div>
+  <br>
+  </form>
+</div>
+<div id="Game" class="tabcontent">
+    ACTOR:
+    <input id="lblActor" type="text"/>
+    <br/>
+    SCORE:
+    <input id="lblScore" type="text"/>
+    TIME:
+    <input id="lblTime" type="text"/>
+    LIVES:
+    <input id="lblLive" type="text"/>
+    <button class="welcomeButtons" id="newDrowButton" onclick="newDrowButton()"><i class="glyphicon glyphicon-user"></i> Start New Game</button>
+    <br/>
+  <canvas id="canvas" height="600" width="600"></canvas>
+</div>
+<div class="modal fade" id="About" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" id="closeModel" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="color: black">About</h4>
+        </div>
+        <div class="modal-body">
+          <p style="color: black">
+            We used only the jQuery validation plugin our website.
+            <br>
+            We didint use any template in our website.
+            <br>
+            The diffeculties we came accross in this project was:
+            <br>
+            1. Making the ghostes chase the pacman and not move randomly
+            <br>
+            2. placing the header and footer content as it is displayed now
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div id="footer">
+<p>Contact Info: 
+    <span class="raheli">Raheli: gvily@post.bgu.ac.il</span>
+    <span class="omer">Omer: dombo@post.bgu.ac.il</span>
+</p>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.4.0.min.js"
+  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+  crossorigin="anonymous"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="javascript/scripty.js"></script>
+</body>
+
+</html>

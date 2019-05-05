@@ -1,0 +1,306 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+  color: white;
+  margin-bottom: 60px;
+  background: url("../images/background.jpg"); 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+#titlebar{
+  display:block;
+left:0;
+right:0;
+bottom:0;
+background: url(../images/header.jpg) no-repeat;
+background-size: cover;
+border-bottom: 1px solid white;
+}
+.top{
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+.omer{
+  position: absolute;
+  left:85%;
+}
+.raheli{
+  position: absolute;
+  left:50%;
+}
+#footer{
+display:block;
+left:0;
+right:0;
+bottom:0;
+background: url(../images/header.jpg) no-repeat;
+background-size: cover;
+padding-top: 14px;
+padding-bottom: 14px;
+border-top: 1px solid white;
+}
+.footerContainer {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.footerContainer .text-muted {
+  margin: 20px 0;
+}
+.footertext {
+  color: #ffffff;
+}
+.title{
+position: relative;
+left: 0%;
+}
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tablink:hover {
+  background-color: #777;
+}
+.welcome{
+  text-align: center;
+}
+#firstBall, #secondBall, #thirdBall{
+  width: 15%;
+  padding: 4px 4px;
+}
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+.active{
+  background-color: #777;
+}
+.welcomeButtons{
+   background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    font-size:1.6em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+}
+
+.welcomeButtons:hover{
+    background:#fff;
+    color:#1AAB8A;
+}
+.welcomeButtons:before,.welcomeButtons:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+}
+.welcomeButtons:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.welcomeButtons:hover:before,.welcomeButtons:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+.invalid{
+  border: 2px solid red;
+}
+.login{
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+#profile-img{
+  margin-left: 35%;
+}
+.lastname{
+   margin-left: 1px;
+     font-family: sans-serif;
+     font-size: 14px;
+     color: black;
+     margin-top: 10px;
+}
+.firstname{
+   margin-left: 1px;
+     font-family: sans-serif;
+     font-size: 14px;
+     color: black;
+     margin-top: 5px;
+}
+input[type="text"],input[type="color"],input[type="number"]{
+   margin-top:5px;
+}
+input[type="range"]{
+  width: 50%;
+  display: inline;
+}
+hr{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+/*---for heading-----*/
+.heading{
+   text-decoration:bold;
+   text-align : center;
+   font-size:30px;
+   color:#F96;
+}
+/*-------for email----------*/
+  /*------label----*/
+#email{
+    margin-top: 5px;
+}
+/*-----------for Password--------*/
+     /*-------label-----*/
+.mail{
+   margin-left: 35px;
+     font-family: sans-serif;
+     color: black;
+     font-size: 14px;
+     margin-top: 13px;
+}
+.pass{
+   color: black;
+     margin-top: 9px;
+     font-size: 14px;
+     font-family: sans-serif;
+     margin-left: 6px;
+     margin-top: 9px;
+}
+#password{
+ margin-top: 6px;
+}
+#username{
+ margin-top: 6px;
+}
+#dob{
+ margin-top: 6px;
+}
+
+
+     /*---------- for Input type--------*/
+.col-xs-4.male{
+   color: black;
+     font-size: 13px;
+     margin-top: 9px;
+     padding-bottom: 16px;
+}
+.col-xs-4.female {
+     color: black;
+     font-size: 13px;
+     margin-top: 9px;
+     padding-bottom: 16px;
+   padding-right: 95px;
+} 
+/*------------For submit button---------*/
+.sbutton{
+   color: black;
+     font-size: 20px;
+     border: 1px solid white;
+     background-color: #080808;
+     width: 32%;
+     margin-left: 41%;
+     margin-top: 16px;
+   box-shadow: 0px 2px 2px 0px white;
+       
+   }
+.btn.btn-warning:hover {
+    box-shadow: 2px 1px 2px 3px #99ccff;
+  background:#5900a6;
+  color:#fff;
+  transition: background-color 1.15s ease-in-out,border-color 1.15s ease-in-out,box-shadow 1.15s ease-in-out;
+  
+}  
+.content{
+  font-family:Roboto,sans-serif;
+    background-image:url(https://image.freepik.com/free-vector/dark-blue-blurred-background_1034-589.jpg) ;
+     border-style: 1px solid grey;
+     margin: 0 auto;
+     text-align: center;
+     opacity: 0.8;
+     margin-top: 67px;
+    box-shadow: 2px 5px 5px 0px #eee;
+     max-width: 600px;
+     padding-top: 10px;
+     padding-left: 15px;
+     padding-right: 15px;
+     width: 700px;
+}
+.error{
+  color:red;
+}
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+#Settings{
+  padding-top: 30px; 
+  width:100%;
+}
+.sliders{
+  margin-top: 5px;
+  display: flex;
+}
+.values{
+  font-size: 18px;
+  margin-left: 5px;
+}
+@media screen and (min-height: 768px) and (min-width: 1366px){
+  canvas{
+    width: inherit;
+    height: inherit;
+  }
+}
