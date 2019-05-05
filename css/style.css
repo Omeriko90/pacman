@@ -1,6 +1,8 @@
 html {
   position: relative;
   min-height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 body {
   height: 100%;
@@ -22,9 +24,17 @@ background: url(../images/header.jpg) no-repeat;
 background-size: cover;
 border-bottom: 1px solid white;
 }
+#Game{
+  color:#AFC6DB;
+  text-shadow: 2px 2px 5px white;
+  padding-top: 5px;
+}
+.gameTitle{
+
+}
 .top{
   margin-bottom: 0;
-  padding-top: 10px;
+  padding-top: 5px;
 }
 .omer{
   position: absolute;
@@ -41,9 +51,11 @@ right:0;
 bottom:0;
 background: url(../images/header.jpg) no-repeat;
 background-size: cover;
-padding-top: 14px;
-padding-bottom: 14px;
+padding-top: 7px;
+padding-bottom: 7px;
 border-top: 1px solid white;
+position: fixed;
+bottom: 0;
 }
 .footerContainer {
   width: auto;
@@ -86,7 +98,7 @@ left: 0%;
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
   display: none;
-  padding: 100px 20px;
+  padding: 0 10%;
   height: 100%;
 }
 .active{
@@ -298,9 +310,20 @@ hr{
   font-size: 18px;
   margin-left: 5px;
 }
-@media screen and (min-height: 768px) and (min-width: 1366px){
-  canvas{
-    width: inherit;
-    height: inherit;
+#newDrowButton{
+  background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:60px;
+    border-radius: 14px;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+}
+@media screen and (max-height: 768px){
+
+  #canvas{
+    width: 76%;
   }
 }

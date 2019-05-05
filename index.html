@@ -2,18 +2,10 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <style type="text/css">
-        body {
-        padding: 0;
-        margin: 0;
-        }
-        #canvas{
-            width: 100%
-            height: 100%;
-        }
-    </style>
+  
 </head>
 
 <body>
@@ -251,18 +243,46 @@
   </form>
 </div>
 <div id="Game" class="tabcontent">
-    ACTOR:
+  <div class="col-sm-4">
+    <div>
+      <div class="label">
+    <label class="gameTitle">ACTOR:</label>
+    </div>
+    <div class="input">
     <input id="lblActor" type="text"/>
-    <br/>
-    SCORE:
+    </div>
+    </div>
+    <div >
+      <div class="label">
+    <label class="gameTitle">SCORE:</label>
+  </div>
+  <div class="input">
     <input id="lblScore" type="text"/>
-    TIME:
+  </div>
+    </div>
+    <div >
+      <div class="label">
+    <label class="gameTitle">TIME:</label>
+  </div>
+  <div class="input">
     <input id="lblTime" type="text"/>
-    LIVES:
+  </div>
+    </div>
+    <div >
+      <div class="label">
+    <label class="gameTitle">LIVES:</label>
+      </div>
+      <div class="input">
     <input id="lblLive" type="text"/>
-    <button class="welcomeButtons" id="newDrowButton" onclick="newDrowButton()"><i class="glyphicon glyphicon-user"></i> Start New Game</button>
-    <br/>
+  </div>
+  <br>
+    </div>
+    <button id="newDrowButton" onclick="newDrowButton()"><i class="glyphicon glyphicon-user"></i> Start New Game</button>
+    <br>
+  </div>
+  <div>
   <canvas id="canvas" height="600" width="600"></canvas>
+  </div>
 </div>
 <div class="modal fade" id="About" role="dialog">
     <div class="modal-dialog">
@@ -283,7 +303,9 @@
             <br>
             1. Making the ghostes chase the pacman and not move randomly
             <br>
-            2. placing the header and footer content as it is displayed now
+            2. Placing the header and footer content as it is displayed now
+            <br>
+            3. Adjusting the game to 1366X768 resolution
           </p>
         </div>
         <div class="modal-footer">

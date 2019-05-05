@@ -15,9 +15,6 @@ var defaultUser = {username:"a", password:"a",firstName:"default",lastName:"user
 var users = []; //Users
 var controls = []; // Game controls
 var colors = ["#e66465","#e66465","#e66465"]; //Balls color
-var fivePoints = false;
-var fifteenPoints = false;
-var twentyFivePoints = false;
 users.push(defaultUser);
 setControls();
 var board=[
@@ -42,17 +39,30 @@ var board=[
   [1,2,2,1,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,1],
   [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
-
+var canvas=document.getElementById("canvas");
+var context=canvas.getContext("2d");
+var left;
+var right;
+var up;
+var down;
+var colorNum1;
+var colorNum2;
+var colorNum3;
+var pacmanPlace;
+var numberOfMon;
+var bgSound = new Audio("music/Intro.mp3");
+var totalSeconds = 0;
+var numOfCoinFirst;
+var monsterPlace=new Array();//all monster position
+var monsterPath=new Array();//all monster path
+var funnyImagePlace=new Array();
+var checkCoin=0;
 /*
 switch between the divs
 */
 function openPage(pageName,button) {
   // Hide all elements with class="tabcontent" by default */
   var i, tabcontent, tablinks;
-  if(pageName === "Game" && !loggedIn){
-    alert("You need to login before you can start playing the game")
-    return;
-  }
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
     tabcontent[i].style.display = "none";
@@ -68,7 +78,7 @@ function openPage(pageName,button) {
   var tab = document.getElementById(pageName);
   tab.style.display = "block";
   button.classList.add("active");
-  if(pageName === 'Login' || pageName === 'Register' || pageName === 'Game'){
+  if(pageName === 'Login' || pageName === 'Register'){
     if(button.id !== pageName+"Header"){
       $("#"+pageName+"Header").addClass("active");
       
@@ -378,7 +388,7 @@ $().ready(function () {
           tablinks[i].classList.remove("active");
         }
         var tab = document.getElementById('Game');
-        tab.style.display = "block";
+        tab.style.display = "flex";
         newDrow(38,40,37,39,"green","pink","red",70,3);
 
         event.preventDefault();
@@ -486,24 +496,6 @@ jQuery.validator.addMethod("colorsCheck3", function(value, element) {
   return !(blackBalls>1 && colors[2] === "#e66465");
 }, "Color can't be assign to more then 1 ball");
 
-var canvas=document.getElementById("canvas");
-var context=canvas.getContext("2d");
-var left;
-var right;
-var up;
-var down;
-var colorNum1;
-var colorNum2;
-var colorNum3;
-var pacmanPlace;
-var numberOfMon;
-var bgSound = new Audio("music/Intro.mp3");
-var totalSeconds = 0;
-var numOfCoinFirst;
-var monsterPlace=new Array();//all monster position
-var monsterPath=new Array();//all monster path
-var funnyImagePlace=new Array();
-var checkCoin=0;
 
 function newDrow(upPress,downPress,leftPress,rightPress,color1,color2,color3,numOfCoin,numOfMonster){
   left=leftPress;
