@@ -147,15 +147,15 @@ update the number of ball\monsters according to the slider ID and updates the di
 */
 function updateValue(element){
   var output;
-  if(element.id === "numOfBalls"){
+  if(element.target.id === "numOfBalls"){
     output = document.getElementById("ballSliderValue");
-    output.innerHTML = element.value;
-    numOfBalls = element.value;
+    output.innerHTML = element.target.value;
+    numOfBalls = element.target.value;
   }
   else{
     output = document.getElementById("monsterSliderValue");
-    output.innerHTML = element.value;
-    numberOfMonsters = element.value;
+    output.innerHTML = element.target.value;
+    numberOfMonsters = element.target.value;
   }
 }
 /*
@@ -383,6 +383,8 @@ $().ready(function () {
         }
       },
       submitHandler: function(form,event){
+        var value = $("#time");
+        time = value[0].value;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
           tabcontent[i].style.display = "none";
