@@ -30,7 +30,7 @@ border-bottom: 1px solid white;
   padding-top: 5px;
 }
 .gameTitle{
-
+  color: #4CAF50
 }
 .top{
   margin-bottom: 0;
@@ -325,5 +325,9 @@ hr{
 
   #canvas{
     width: 76%;
+  }
+
+  .input{
+    color: #080808;
   }
 }

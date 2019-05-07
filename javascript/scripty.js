@@ -6,6 +6,7 @@ var time;
 var interval;
 var gameInterval;
 var winSound = new Audio("music/Ta Da-SoundBible.com-1884170640.mp3");
+var lostSound=new Audio("music/pacman_death.wav");
 var user = {
   username: "",
   password: "",
@@ -553,12 +554,23 @@ var interval;
 var pacStart;
 var count=0;
 var count2=0;
+var chngePage=false;
+var saveBoard=board;
+var lose=false;
+var numOfCoinDelete;
+var timer;
 
 function newDrow(upPress,downPress,leftPress,rightPress,color1,color2,color3,numOfCoin,numOfMonster,timeForGame,first){
+  checkCoinMonster1=2;
+  checkCoinMonster2=2;
+  checkCoinMonster3=2;
+  lose=false;
+  numOfCoinDelete=numOfCoin+1;
+  board=saveBoard;
   timeChosen=timeForGame;
   count=0;
   count2=0
-  path=false;
+  path=false;//about the third monsterpath
   left=leftPress;
   right=rightPress;
   up=upPress;
@@ -582,26 +594,29 @@ function newDrow(upPress,downPress,leftPress,rightPress,color1,color2,color3,num
   var score=document.getElementById("lblScore");
   score.value=0;
   var actor=document.getElementById("lblActor");
-  actor.value=document.getElementById("username").value;
+  var name=document.getElementById("user").value;
+  actor.value=name;
   if(first){
     var life=document.getElementById("lblLive");
     life.value=3;
   }
-  //addMusic();
+  addMusic();
   startGame();
   moveRandomFunnyImage();
-  timer();
+  timerStart();
+  if(!chngePage){
   addEventListener("keydown", function (e) {
     keys[e.code] = true;
     preesKeys();
     keys[e.code]=false;
     }, false);
+  }
 }
 
 
 function newDrowButton(){
+  chngePage=true;
   stopMusic();
-  addMusic();
   context.clearRect(0,0,canvas.width,canvas.height);
   context=canvas.getContext("2d");
   var goUp=up;
@@ -613,16 +628,16 @@ function newDrowButton(){
   var col3=colorNum3;
   var numCoin=numOfCoinFirst;
   var numMonster=numberOfMon;
-  newDrow(goUp,goDown,goLeft,goRight,col1,col2,col3,numCoin,numMonster,timeChosen,true)
-
+  monsterPlace=new Array();
+  newDrow(goUp,goDown,goLeft,goRight,col1,col2,col3,numCoin,numMonster,timeChosen,false)
 }
 
-function timer(){
-  var timer = setInterval(function(){
+function timerStart(){
+  timer = setInterval(function(){
       var timeTemp=document.getElementById('lblTime');
       timeTemp.value="00:"+timeChosen;
       timeChosen--;
-      if (timeChosen == "00") {
+      if (timeChosen == "00" && !lose) {
           clearInterval(timer);
           timeOut();
       }
@@ -631,12 +646,13 @@ function timer(){
 
 function timeOut(){
   var score=document.getElementById("lblScore");
-  if(score<150){
-    endGame("You can do better: "+score,"loss");
+  if(score.value<150){
+    endGame("You can do better: "+score.value,"loss");
   }
   else{
     endGame("We have a Winner!!!","win");
   }
+  clearInterval(timer);
 }
 
 
@@ -772,6 +788,10 @@ function moveMonsterNumber1(){
     board[cuurPlace[0]][cuurPlace[1]]=checkCoinMonster1;
   }
   cuurPlace=opptionMove[randomMove];
+  if(board[cuurPlace[0]][cuurPlace[1]]==10){
+    meetMonster();
+    return;
+  }
   monsterPlace[0]=cuurPlace;
   checkCoinMonster1=board[cuurPlace[0]][cuurPlace[1]];
   board[cuurPlace[0]][cuurPlace[1]]=3;
@@ -836,6 +856,10 @@ function moveMonsterNumber2(){
   else{
     cuurPlace=randomMove;
   }
+  if(board[cuurPlace[0]][cuurPlace[1]]==10){
+    meetMonster();
+    return;
+  }
   monsterPlace[1]=cuurPlace;
   checkCoinMonster2=board[cuurPlace[0]][cuurPlace[1]];
   board[cuurPlace[0]][cuurPlace[1]]=6;
@@ -848,7 +872,6 @@ function moveMonsterNumber2(){
 
 function moveMonsterNumber3(){
   count2++;
-  console.log(count2);
   var cuurPlace=[monsterPlace[2][0],monsterPlace[2][1]];
   var randomMove;
   var otherMove;
@@ -909,7 +932,11 @@ function moveMonsterNumber3(){
     count2=0;
   }
   else{
-  cuurPlace=randomMove;
+    cuurPlace=randomMove;
+  }
+  if(board[cuurPlace[0]][cuurPlace[1]]==10){
+    meetMonster();
+    return;
   }
   monsterPlace[2]=cuurPlace;
   checkCoinMonster3=board[cuurPlace[0]][cuurPlace[1]];
@@ -1036,6 +1063,9 @@ function drowPacman(place,direction,first){
     center.x=place[0]*30+30;
     center.y=place[1]*30+30;
     context.clearRect(center.x-30,center.y-30,30,30);
+    if(first=="funny"){
+      clearInterval(interval);
+    }   
   board[pacmanPlace[0]][pacmanPlace[1]]=10;
   board[place[0]][place[1]]=2;
       center.x=pacmanPlace[0]*30+30;
@@ -1177,6 +1207,7 @@ function endGame(alertMes,type){
   stopMusic();
   clearInterval(interval);
   clearInterval(gameInterval);
+  clearInterval(timer);
   context.clearRect(0,0,canvas.width,canvas.height);
   context=canvas.getContext("2d");
   var imageBack=new Image();
@@ -1208,7 +1239,6 @@ function endGame(alertMes,type){
   else
     playlose();
   }
-  
 }
 /*
   plays the winner music
@@ -1233,42 +1263,55 @@ function stopMusic(){
 }
 
 function meetMonster(){
+  chngePage=true;
   stopMusic();
+  clearInterval(interval);
+  clearInterval(gameInterval);
+  clearInterval(timer);
   var point=document.getElementById("lblScore");
   point.value=parseInt(point.value)-10;
   var life=document.getElementById("lblLive");
   life.value=parseInt(life.value)-1;
   if(life.value==0){
-    alert("Game over");
     endGame("You Lost!","loss");
+    lose=true;
   }
   else{
     context.clearRect(0,0,canvas.width,canvas.height);
     context=canvas.getContext("2d");
-    newDrow(controls[0],controls[1],controls[2],controls[3],colorNum1,colorNum2,colorNum3,numOfCoinFirst,numberOfMon,70,false)
+    monsterPlace=new Array();
+    newDrow(controls[0],controls[1],controls[2],controls[3],colorNum1,colorNum2,colorNum3,numOfCoinFirst,numberOfMon,time,false)
   }
 }
 
 function winPoints(valPoint){
   var point=document.getElementById("lblScore");
   if(valPoint==0){
-    valPoint==50;
+    numOfCoinDelete--
+    valPoint=50;
   }
   else if(valPoint==4){
+    numOfCoinDelete--
     valPoint=5;
   }
   else if(valPoint==5){
+    numOfCoinDelete--
     valPoint=15;
   }
   else{
+    numOfCoinDelete--
     valPoint=25;
   }
   point.value=parseInt(point.value)+valPoint;
+  if(numOfCoinDelete==0){
+    endGame("We have a winner!!!", "win");
+  }
 }
 
 
 function moveDown(x,y) {
   var notWall=false;
+  var type="";
   if (board[x][y+1] !== 1) {
       notWall=true;
       pacmanPlace=[x,y+1];
@@ -1276,9 +1319,14 @@ function moveDown(x,y) {
   if(board[x][y+1]==3 || board[x][y+1]==6 || board[x][y+1]==8 ){
     meetMonster();
   }
-  else if(board[x][y+1]==4 || board[x][y+1]==5 || board[x][y+1]==7 || board[x][y+1]==0){
+  else if(board[x][y+1]==4 || board[x][y+1]==5 || board[x][y+1]==7){
     var value=board[x][y+1];
     winPoints(value);
+  }
+  else if(board[x][y+1]==0){
+    var value=board[x][y+1];
+    winPoints(value);
+    type="funny";
   }
   else if(board[x][y+1]==11){
     timeChosen=timeChosen+20;
@@ -1287,11 +1335,12 @@ function moveDown(x,y) {
     board[x][y+1]=10;
     board[x][y]=2;
   }
-  drowPacman([x,y],"down",false);
+  drowPacman([x,y],"down",type);
 }
 
 function moveUp(x,y) {
   var notWall=false;
+  var type="";
   if (board[x][y-1] !== 1) {
       notWall=true;
       pacmanPlace=[x,y-1];
@@ -1299,10 +1348,16 @@ function moveUp(x,y) {
   if(board[x][y-1]==3 || board[x][y-1]==6 || board[x][y-1]==8){
     meetMonster();
   }
-  else if(board[x][y-1]==4 || board[x][y-1]==5 || board[x][y-1]==7 || board[x][y-1]==0){
+  else if(board[x][y-1]==4 || board[x][y-1]==5 || board[x][y-1]==7){
     var value=board[x][y-1];
     winPoints(value);
   }
+  else if(board[x][y-1]==0){
+    var value=board[x][y-1];
+    winPoints(value);
+    type="funny";
+  }
+
   else if(board[x][y-1]==11){
     timeChosen=timeChosen+20;
   }
@@ -1310,11 +1365,12 @@ function moveUp(x,y) {
     board[x][y-1]=10;
     board[x][y] = 2;
   }
-  drowPacman([x,y],"up",false);
+  drowPacman([x,y],"up",type);
 }
 
 function moveLeft(x,y) {
   var notWall=false;
+  var type="";
   if (board[x-1][y] !== 1) {
       notWall=true;
       pacmanPlace=[x-1,y];
@@ -1322,9 +1378,14 @@ function moveLeft(x,y) {
   if(board[x-1][y]==3 || board[x-1][y]==6 || board[x-1][y]==8){
     meetMonster();
   }
-  else if(board[x-1][y]==4 || board[x-1][y]==5 || board[x-1][y]==7 || board[x-1][y]==0){
+  else if(board[x-1][y]==4 || board[x-1][y]==5 || board[x-1][y]==7){
     var value=board[x-1][y];
     winPoints(value);
+  }
+  else if(board[x-1][y]==0){
+    var value=board[x-1][y];
+    winPoints(value);
+    type="funny";
   }
   else if(board[x-1][y]==11){
     timeChosen=timeChosen+20;
@@ -1333,11 +1394,12 @@ function moveLeft(x,y) {
     board[x-1][y]=10;
     board[x][y] = 2;
   }
-  drowPacman([x,y],"left",false);
+  drowPacman([x,y],"left",type);
 }
 
 function moveRight(x,y) {
   var notWall=false;
+  var type="";
   if (board[x+1][y] !== 1) {
       notWall=true;
       pacmanPlace=[x+1,y];
@@ -1345,9 +1407,14 @@ function moveRight(x,y) {
   if(board[x+1][y]==3 || board[x+1][y]==6 || board[x+1][y]==8){
     meetMonster();
   }
-  else if(board[x+1][y]==4 || board[x+1][y]==5 || board[x+1][y]==7 || board[x+1][y]==0){
+  else if(board[x+1][y]==4 || board[x+1][y]==5 || board[x+1][y]==7){
     var value=board[x+1][y];
     winPoints(value);
+  }
+  else if(board[x+1][y]==0){
+    var value=board[x+1][y];
+    winPoints(value);
+    type="funny";
   }
   else if(board[x+1][y]==11){
     timeChosen=timeChosen+20;
@@ -1356,7 +1423,7 @@ function moveRight(x,y) {
     board[x+1][y]=10;
     board[x][y] = 2;
   }
-  drowPacman([x,y],"right",false);
+  drowPacman([x,y],"right",type);
 }
 
 
